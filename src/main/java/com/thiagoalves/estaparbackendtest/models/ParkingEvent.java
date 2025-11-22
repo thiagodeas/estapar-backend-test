@@ -26,8 +26,9 @@ public class ParkingEvent {
     private LocalDateTime entryTime;
     private LocalDateTime exitTime;
 
-    private BigDecimal priceCalculated;
     private BigDecimal dynamicMultiplier;
+
+    private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
     private ParkingEventStatus status;
@@ -66,9 +67,6 @@ public class ParkingEvent {
     public LocalDateTime getExitTime() { return exitTime; }
     public void setExitTime(LocalDateTime exitTime) { this.exitTime = exitTime; }
 
-    public BigDecimal getPriceCalculated() { return priceCalculated; }
-    public void setPriceCalculated(BigDecimal priceCalculated) { this.priceCalculated = priceCalculated; }
-
     public BigDecimal getDynamicMultiplier() { return dynamicMultiplier; }
     public void setDynamicMultiplier(BigDecimal dynamicMultiplier) { this.dynamicMultiplier = dynamicMultiplier; }
 
@@ -80,4 +78,7 @@ public class ParkingEvent {
 
     public Spot getSpot() { return spot; }
     public void setSpot(Spot spot) { this.spot = spot; }
+
+    public BigDecimal getAmount() { return amount; }
+    public void setAmount(BigDecimal amount) { this.amount = amount; }
 }
