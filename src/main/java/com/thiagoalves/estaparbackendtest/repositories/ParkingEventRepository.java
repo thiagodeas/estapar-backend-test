@@ -15,4 +15,6 @@ public interface ParkingEventRepository extends JpaRepository<ParkingEvent, Long
 
     List<ParkingEvent> findBySector(Sector sector);
 
+    int countBySectorAndExitTimeIsNull(Sector sector);
+
 }
