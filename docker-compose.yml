@@ -1,4 +1,5 @@
 services:
+
   mysql:
     image: mysql:8.0
     container_name: estapar-mysql
@@ -11,6 +12,7 @@ services:
       - "3306:3306"
     volumes:
       - ./mysql-data:/var/lib/mysql
+    restart: always
 
   simulator:
     image: cfontes0estapar/garage-sim:1.0.0
@@ -21,11 +23,11 @@ services:
   backend:
     build: .
     container_name: estapar-backend
-    ports:
-      - "8080:8080"
-    depends_on:
-      - mysql
+    network_mode: "host"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE}
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/${MYSQL_DATABASE}
       SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
       SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
+    depends_on:
+      - mysql
+    restart: always
