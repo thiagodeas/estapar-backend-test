@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.thiagoalves.estaparbackendtest.dtos.revenue.RevenueRequestDTO;
 import com.thiagoalves.estaparbackendtest.dtos.revenue.RevenueResponseDTO;
+import com.thiagoalves.estaparbackendtest.exceptions.SectorNotFoundException;
 import com.thiagoalves.estaparbackendtest.models.ParkingEvent;
 import com.thiagoalves.estaparbackendtest.models.Sector;
 import com.thiagoalves.estaparbackendtest.repositories.ParkingEventRepository;
@@ -32,7 +33,7 @@ public class RevenueService {
 
         Sector sector = sectorRepository.findBySector(request.sector);
         if (sector == null) {
-            throw new RuntimeException("Setor inexistente.");
+            throw new SectorNotFoundException("Setor inexistente.");
         }
 
         List<ParkingEvent> events =
@@ -48,5 +49,4 @@ public class RevenueService {
                 targetDate.atStartOfDay().toString()
         );
     }
-
 }

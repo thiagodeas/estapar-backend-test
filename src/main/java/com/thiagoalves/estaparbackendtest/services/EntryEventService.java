@@ -6,8 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.thiagoalves.estaparbackendtest.dtos.webhook.EntryEventDTO;
+import com.thiagoalves.estaparbackendtest.exceptions.NoAvailableSectorException;
+import com.thiagoalves.estaparbackendtest.exceptions.VehicleAlreadyInsideException;
 import com.thiagoalves.estaparbackendtest.models.ParkingEvent;
-
 import com.thiagoalves.estaparbackendtest.models.Sector;
 import com.thiagoalves.estaparbackendtest.models.enums.ParkingEventStatus;
 import com.thiagoalves.estaparbackendtest.repositories.ParkingEventRepository;
@@ -32,12 +33,12 @@ public class EntryEventService {
                 .findByLicensePlateAndExitTimeIsNull(entryEvent.licensePlate);
 
         if (existing != null) {
-            throw new RuntimeException("Veículo já está dentro do estacionamento.");
+            throw new VehicleAlreadyInsideException("Veículo já está dentro do estacionamento.");
         }
 
         Sector chosenSector = chooseSector();
         if (chosenSector == null) {
-            throw new RuntimeException("Nenhum setor disponível no momento.");
+            throw new NoAvailableSectorException("Nenhum setor disponível no momento.");
         }
 
         int currentCars = parkingEventRepository.countBySectorAndExitTimeIsNull(chosenSector);

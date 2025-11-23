@@ -6,6 +6,7 @@ import java.time.Duration;
 import org.springframework.stereotype.Service;
 
 import com.thiagoalves.estaparbackendtest.dtos.webhook.ExitEventDTO;
+import com.thiagoalves.estaparbackendtest.exceptions.VehicleNotInsideException;
 import com.thiagoalves.estaparbackendtest.models.ParkingEvent;
 import com.thiagoalves.estaparbackendtest.models.Spot;
 import com.thiagoalves.estaparbackendtest.models.enums.ParkingEventStatus;
@@ -31,7 +32,7 @@ public class ExitEventService {
                 .findByLicensePlateAndExitTimeIsNull(exitEvent.licensePlate);
 
         if (event == null) {
-            throw new RuntimeException("EXIT recebido para veículo que não está dentro.");
+            throw new VehicleNotInsideException("EXIT recebido para veículo que não está dentro.");
         }
 
         event.setExitTime(exitEvent.exitTime);
