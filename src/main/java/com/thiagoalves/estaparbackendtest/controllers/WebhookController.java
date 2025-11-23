@@ -1,5 +1,7 @@
 package com.thiagoalves.estaparbackendtest.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,8 @@ import com.thiagoalves.estaparbackendtest.services.ParkedEventService;
 
 @RestController
 public class WebhookController {
+
+    private static final Logger logger = LoggerFactory.getLogger(WebhookController.class);
 
     private final EntryEventService entryService;
     private final ParkedEventService parkedService;
@@ -44,10 +48,12 @@ public class WebhookController {
 
             else if ("EXIT".equalsIgnoreCase(dto.event_type)) {
                 exitService.process(new ExitEventDTO(dto));
+            } else {
+                logger.warn("Evento desconhecido recebido: {}", dto.event_type);
             }
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.error("Erro ao processar evento webhook: {}", dto.event_type, ex);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
