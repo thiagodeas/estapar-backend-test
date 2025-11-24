@@ -242,9 +242,9 @@ SELECT * FROM parking_event WHERE license_plate = 'AAA0001';
 ```
 
 ### Resultado:
-```bash
-
-```
+- exit_time = NULL
+- status = ENTRY
+- spot_id = NULL (vaga só é preenchida no PARKED)
 
 ### ➤ PARKED 
 Method: POST
@@ -269,9 +269,9 @@ SELECT * FROM parking_event WHERE license_plate = 'AAA0001';
 ```
 
 ### Resultado:
-status muda para PARKED  
-spot_id agora = 1 (ou a vaga correta do setor)
-occupied = 1 na tabela spot
+- status muda para PARKED  
+- spot_id agora = 1 (ou a vaga correta do setor)
+- occupied = 1 na tabela spot
 
 
 ### ➤ EXIT – Insomnia
@@ -296,9 +296,9 @@ SELECT * FROM parking_event WHERE license_plate = 'AAA0001';
 ```
 
 ### Resultado:
-Calcula o valor
-Atualiza o status para EXIT
-Libera a vaga (occupied = 0)
+- Calcula o valor
+- Atualiza o status para EXIT
+- Libera a vaga (occupied = 0)
 
 
 ## 💰 Testando o endpoint /revenue
