@@ -1,7 +1,6 @@
 package com.thiagoalves.estaparbackendtest.dtos.webhook;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
 public class ExitEventDTO {
 
@@ -10,6 +9,6 @@ public class ExitEventDTO {
 
     public ExitEventDTO(GenericWebhookDTO dto) {
         this.licensePlate = dto.license_plate;
-        this.exitTime = OffsetDateTime.parse(dto.exit_time).toLocalDateTime();
+        this.exitTime = LocalDateTime.parse(dto.exit_time);
     }
 }
