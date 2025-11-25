@@ -39,9 +39,7 @@ public class GarageService {
     public void loadGarageData() {
         logger.info("Carregando configuração da garagem...");
 
-        RestTemplate restTemplate = new RestTemplate();
-
-        GarageResponseDTO response = restTemplate.getForObject(garageUrl, GarageResponseDTO.class);
+        GarageResponseDTO response = getGarageResponse();
 
         if (response == null) {
             logger.error("Erro: resposta nula do simulador.");
@@ -55,7 +53,12 @@ public class GarageService {
         logger.info("Configuração da garagem carregada com sucesso!");
     }
 
-    private void saveSector(SectorDTO dto) {
+    GarageResponseDTO getGarageResponse() {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(garageUrl, GarageResponseDTO.class);
+    }
+
+    public void saveSector(SectorDTO dto) {
         Sector sector = sectorRepository.findBySector(dto.sector);
 
         if (sector == null) {
@@ -75,7 +78,7 @@ public class GarageService {
         sectorRepository.save(sector);
     }
 
-    private void saveSpot(SpotDTO dto) {
+    public void saveSpot(SpotDTO dto) {
         Sector sector = sectorRepository.findBySector(dto.sector);
 
         if (sector == null) {
