@@ -389,4 +389,4 @@ src/
 
 ## 🔄 Diagrama do Fluxo da Aplicação
 
-<img src="./docs/flowchart.svg" width="100%" />
+<img src="./docs/flowchart.png" width="100%" />
