@@ -325,6 +325,17 @@ Resposta:
 
 ---
 
+## 🧪 Testes Unitários
+
+O projeto possui cobertura de testes unitários para todos os serviços (`EntryEventService`, `ExitEventService`, `ParkedEventService`, `GarageService`, `RevenueService`), utilizando JUnit e Mockito.
+
+Para rodar os testes:
+```powershell
+mvn test
+```
+Os testes garantem o correto funcionamento das regras de negócio e facilitam futuras manutenções.
+
+---
 ## 🛠️ Estrutura do Projeto
 
 ```
